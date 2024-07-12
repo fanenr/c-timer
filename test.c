@@ -5,6 +5,7 @@
 
 #include <sys/epoll.h>
 #include <sys/timerfd.h>
+#include <unistd.h>
 
 void
 callback (void *arg)
@@ -34,4 +35,5 @@ main (void)
     }
 
   timer_free (&mgr);
+  close (epfd);
 }
