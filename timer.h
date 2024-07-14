@@ -10,15 +10,15 @@ typedef struct timer_task_t timer_task_t;
 
 struct timer_mgr_t
 {
-  size_t cap;
-  size_t size;
+  unsigned cap;
+  unsigned size;
   timer_task_t *tasks;
 };
 
 struct timer_task_t
 {
   void *arg;
-  long expire;
+  size_t expire;
   timer_cb_t *cb;
 };
 
