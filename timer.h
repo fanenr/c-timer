@@ -12,7 +12,7 @@ struct timer_mgr_t
 {
   unsigned cap;
   unsigned size;
-  timer_task_t *tasks;
+  timer_task_t **tasks;
 };
 
 struct timer_task_t
@@ -20,17 +20,21 @@ struct timer_task_t
   void *arg;
   size_t expire;
   timer_cb_t *cb;
+  unsigned index;
+  unsigned times;
 };
 
 #define TIMER_MGR_INIT                                                        \
   (timer_mgr_t) {}
 
-void timer_free (timer_mgr_t *mgr);
+void timer_mgr_free (timer_mgr_t *mgr);
 
-void timer_exec (timer_mgr_t *mgr);
+void timer_mgr_exec (timer_mgr_t *mgr);
 
-int timer_recent (timer_mgr_t *mgr);
+int timer_mgr_recent (timer_mgr_t *mgr);
 
-timer_task_t *timer_add (timer_mgr_t *mgr, int ms, timer_cb_t *cb, void *arg);
+void timer_mgr_del (timer_mgr_t *mgr, timer_task_t *task);
+
+timer_task_t *timer_mgr_add (timer_mgr_t *mgr, timer_task_t *task);
 
 #endif
