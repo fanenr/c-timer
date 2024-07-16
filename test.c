@@ -104,11 +104,8 @@ task_new (int ms)
   if ((new = malloc (sizeof (timer_task_t))))
     {
       new->cb = callback;
-      new->arg = new;
-
       new->expire = ms;
-      new->times = 1;
-
+      new->arg = new;
       return new;
     }
 

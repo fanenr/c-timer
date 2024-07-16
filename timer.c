@@ -1,7 +1,7 @@
 #include "timer.h"
 
-#include <stdbool.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define LEFT(i) ((i) * 2 + 1)
 #define RIGHT(i) ((i) * 2 + 2)
@@ -62,12 +62,12 @@ timer_mgr_del (timer_mgr_t *mgr, timer_task_t *task)
     }
 }
 
-timer_task_t *
+bool
 timer_mgr_add (timer_mgr_t *mgr, timer_task_t *task)
 {
   size_t size = mgr->size, now;
 
-  if (mgr_expand (mgr) && task->expire > 0 && (now = time_now ()))
+  if (mgr_expand (mgr) && (now = time_now ()))
     {
       task->index = size;
       task->expire += now;
@@ -75,10 +75,10 @@ timer_mgr_add (timer_mgr_t *mgr, timer_task_t *task)
       mgr->tasks[size] = task;
       shift_up (mgr, mgr->size++);
 
-      return task;
+      return true;
     }
 
-  return NULL;
+  return false;
 }
 
 static inline size_t
