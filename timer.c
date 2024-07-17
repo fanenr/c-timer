@@ -9,12 +9,12 @@
 
 static size_t time_now (void);
 
-static void mgr_pop (timer_mgr_t *mgr);
-static bool mgr_expand (timer_mgr_t *mgr);
 #define mgr_top(mgr) (mgr->size ? mgr->tasks[0] : NULL)
+static void mgr_pop (timer_mgr_t *mgr) attr_nonnull (1);
+static bool mgr_expand (timer_mgr_t *mgr) attr_nonnull (1);
 
-static void shift_up (timer_mgr_t *mgr, unsigned i);
-static void shift_down (timer_mgr_t *mgr, unsigned i);
+static void shift_up (timer_mgr_t *mgr, unsigned i) attr_nonnull (1);
+static void shift_down (timer_mgr_t *mgr, unsigned i) attr_nonnull (1);
 
 void
 timer_mgr_free (timer_mgr_t *mgr)

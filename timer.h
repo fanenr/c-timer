@@ -8,6 +8,8 @@ typedef void timer_cb_t (void *arg);
 typedef struct timer_mgr_t timer_mgr_t;
 typedef struct timer_task_t timer_task_t;
 
+#define attr_nonnull(...) __attribute__ ((nonnull (__VA_ARGS__)))
+
 struct timer_mgr_t
 {
   unsigned cap;
@@ -26,14 +28,16 @@ struct timer_task_t
 #define TIMER_MGR_INIT                                                        \
   (timer_mgr_t) {}
 
-void timer_mgr_free (timer_mgr_t *mgr);
+extern void timer_mgr_free (timer_mgr_t *mgr) attr_nonnull (1);
 
-void timer_mgr_exec (timer_mgr_t *mgr);
+extern void timer_mgr_exec (timer_mgr_t *mgr) attr_nonnull (1);
 
-int timer_mgr_recent (timer_mgr_t *mgr);
+extern int timer_mgr_recent (timer_mgr_t *mgr) attr_nonnull (1);
 
-void timer_mgr_del (timer_mgr_t *mgr, timer_task_t *task);
+extern void timer_mgr_del (timer_mgr_t *mgr, timer_task_t *task)
+    attr_nonnull (1, 2);
 
-bool timer_mgr_add (timer_mgr_t *mgr, timer_task_t *task);
+extern bool timer_mgr_add (timer_mgr_t *mgr, timer_task_t *task)
+    attr_nonnull (1, 2);
 
 #endif
