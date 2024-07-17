@@ -1,0 +1,3 @@
+A tiny timer implementation (use min-heap).
+
+Usage: see timer.h and test.c.
