@@ -26,7 +26,8 @@ timer_mgr_free (timer_mgr_t *mgr)
 void
 timer_mgr_exec (timer_mgr_t *mgr)
 {
-  for (timer_task_t *top; (top = mgr_top (mgr)) && top->expire <= time_now ();
+  size_t now = time_now ();
+  for (timer_task_t *top; (top = mgr_top (mgr)) && top->expire <= now;
        mgr_pop (mgr))
     top->cb (top->arg);
 }
