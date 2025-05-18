@@ -46,13 +46,13 @@ main (void)
       its.it_value.tv_sec = ms / 1000;
 
       if (timerfd_settime (tmfd, 0, &its, NULL) == -1)
-        abort ();
+	abort ();
 
       if (epoll_wait (epfd, &ev, 1, -1) == -1)
-        abort ();
+	abort ();
 
       if (ev.data.fd == tmfd)
-        timer_mgr_exec (&mgr);
+	timer_mgr_exec (&mgr);
     }
 
   timer_mgr_free (&mgr);
@@ -69,11 +69,11 @@ tasks_delete (void)
       unsigned idx = rand_long (0, N);
 
       if ((task = tasks[idx]))
-        {
-          timer_mgr_del (&mgr, task);
-          free (tasks[idx]);
-          tasks[idx] = NULL;
-        }
+	{
+	  timer_mgr_del (&mgr, task);
+	  free (tasks[idx]);
+	  tasks[idx] = NULL;
+	}
     }
 }
 
@@ -84,7 +84,7 @@ tasks_fill (void)
     {
       int ms = rand_long (100, 2000);
       if (!timer_mgr_add (&mgr, (tasks[i] = task_new (ms))))
-        abort ();
+	abort ();
     }
 }
 

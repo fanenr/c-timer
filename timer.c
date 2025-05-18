@@ -57,9 +57,9 @@ timer_mgr_del (timer_mgr_t *mgr, timer_task_t *task)
       mgr->tasks[i]->index = i;
 
       if (!i || less (mgr->tasks, p, i))
-        shift_down (mgr, i);
+	shift_down (mgr, i);
       else
-        shift_up (mgr, i);
+	shift_up (mgr, i);
     }
 }
 
@@ -152,8 +152,8 @@ shift_down (timer_mgr_t *mgr, unsigned i)
   unsigned s = mgr->size;
   timer_task_t **tasks = mgr->tasks;
   for (unsigned m, l, r; (m = i, l = LEFT (i), r = RIGHT (i),
-                         m = l < s && greater (tasks, m, l) ? l : m,
-                         m = r < s && greater (tasks, m, r) ? r : m, m != i);
+			 m = l < s && greater (tasks, m, l) ? l : m,
+			 m = r < s && greater (tasks, m, r) ? r : m, m != i);
        i = m)
     swap (tasks, i, m);
 }
